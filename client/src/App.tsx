@@ -13,6 +13,7 @@ function App() {
         <Route path="/browse" element={null} />
         <Route path="/schedule" element={null} />
         <Route path="/login" element={null} />
+        <Route path="/anime/:id" element={null} />
       </Routes>
     </>
   )
