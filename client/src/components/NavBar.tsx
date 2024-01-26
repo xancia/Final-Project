@@ -44,7 +44,9 @@ export const NavBar = () => {
         </ul>
       </div>
       <div className="hidden md:flex md:items-center">
-        <Button className="mr-4" asChild><a href="/login">Log In</a></Button>
+        <Button className="mr-4" asChild>
+          <a href="/login">Log In</a>
+        </Button>
         <ModeToggle />
       </div>
       <div
@@ -60,7 +62,6 @@ export const NavBar = () => {
 
       {nav && (
         <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-gray-50 to-gray-300 dark:from-slate-950 dark:to-slate-800 text-slate-900 dark:text-white z-11">
-          
           <ModeToggle />
           {links.map(({ id, link, href }) => (
             <li
@@ -72,7 +73,9 @@ export const NavBar = () => {
               </Link>
             </li>
           ))}
-          <Button className="mt-4" asChild><a href="/login">Log In</a></Button>
+          <Button className="mt-4" asChild>
+            <a href="/login">Log In</a>
+          </Button>
         </ul>
       )}
     </div>
