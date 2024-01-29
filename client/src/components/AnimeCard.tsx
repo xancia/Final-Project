@@ -2,14 +2,16 @@ import { ExtendedAnimeData, userType } from "@/vite-env";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./utility/store";
+import { addSavedAnime } from "./utility/userDataSlice";
 
 interface AnimeCardProps {
   anime: ExtendedAnimeData;
 }
 
 const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
+    const dispatch = useDispatch()
   const imageUrl = anime.images?.jpg.image_url;
   const userData = useSelector((state: RootState) => state.userData as userType | null)
   const isAnimeSaved = userData?.animeList?.some(item => item.mal_id === anime.mal_id);
@@ -35,7 +37,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
           Authorization: token
         }
       });
-
+      dispatch(addSavedAnime(animeData))
       console.log('Anime added:', response.data);
     } catch (error) {
       console.error('Error adding anime:', error);

@@ -3,9 +3,14 @@ import { useState } from "react";
 import { ModeToggle } from "./utility/mode-toggle";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
+import { RootState } from "./utility/store";
+import { userType } from "@/vite-env";
+import { useSelector } from "react-redux";
 
 export const NavBar = () => {
   const [nav, setNav] = useState(false);
+  const userData = useSelector((state: RootState) => state.userData as userType | null)
+  const isLoggedIn = userData && Object.keys(userData).length > 0;
 
   const links = [
     {
@@ -44,10 +49,22 @@ export const NavBar = () => {
         </ul>
       </div>
       <div className="hidden md:flex md:items-center">
-        <Button className="mr-4" asChild>
-          <a href="/login">Log In</a>
-        </Button>
-        <ModeToggle />
+      {isLoggedIn ? (
+          <>
+            <Link to='/library' className="mr-4">
+              <p>Library</p>
+            </Link>
+            <ModeToggle />
+          </>
+        ) : (
+          <>
+            <Button className="mr-4" asChild>
+              <Link to='/login'>Log in</Link>
+            </Button>
+            <ModeToggle />
+          </>
+        )}
+
       </div>
       <div
         onClick={() => setNav(!nav)}
