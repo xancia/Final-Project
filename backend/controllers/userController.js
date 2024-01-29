@@ -8,6 +8,7 @@ async function show(req, res) {
         res.status(200).json({
             username: foundUser.username,
             email: foundUser.email,
+            animeList: foundUser.animeList
         })
 
     } catch(err) {

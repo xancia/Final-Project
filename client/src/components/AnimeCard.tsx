@@ -1,7 +1,9 @@
-import { ExtendedAnimeData } from "@/vite-env";
+import { ExtendedAnimeData, userType } from "@/vite-env";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useSelector } from "react-redux";
+import { RootState } from "./utility/store";
 
 interface AnimeCardProps {
   anime: ExtendedAnimeData;
@@ -9,6 +11,8 @@ interface AnimeCardProps {
 
 const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
   const imageUrl = anime.images?.jpg.image_url;
+  const userData = useSelector((state: RootState) => state.userData as userType | null)
+  const isAnimeSaved = userData?.animeList?.some(item => item.mal_id === anime.mal_id);
 
   async function handleClick() {
     try {
@@ -57,7 +61,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
         <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10" onClick={handleClick}>
           <Icon
             className="text-xl"
-            icon="material-symbols:bookmark-outline-sharp"
+            icon={isAnimeSaved ? "material-symbols:bookmark-sharp" : "material-symbols:bookmark-outline-sharp"}
           />
         </button>
 

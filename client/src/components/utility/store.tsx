@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import animeReducer from "./animeDataSlice"
+import userReducer from "./userDataSlice"
 
 export const store = configureStore({
   reducer: {
-    animeData: animeReducer,
+    userData: userReducer,
   },
 });
 

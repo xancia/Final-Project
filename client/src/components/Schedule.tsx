@@ -5,6 +5,8 @@ import AnimeWeek from "./AnimeWeek";
 import { ExtendedAnimeData } from "@/vite-env";
 import axios from 'axios';
 
+
+
 const Schedule = () => {
   // Build a JakanMisc client
   const miscClient = new Jakan().withMemory().forMisc();

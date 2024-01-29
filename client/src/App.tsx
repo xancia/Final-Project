@@ -5,9 +5,19 @@ import Register from "./components/pages/Register"
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Login from "./components/pages/Login";
+import { userType } from "./vite-env";
+import { useDispatch } from "react-redux";
+import { setUserData } from "./components/utility/userDataSlice";
+
+const inititalUserState:userType = {
+  username: '',
+  email: '',
+  animeList: []
+}
 
 function App() {
-  const [user, setUser] = useState({})
+  const dispatch = useDispatch();
+  const [user, setUser] = useState<userType>(inititalUserState)
   async function getUser(token: string) {
     try {
         const response = await axios.get('http://localhost:8080/api/users', {
@@ -17,6 +27,7 @@ function App() {
         })
 
         setUser(response.data)
+        dispatch(setUserData(response.data))
     } catch (error) {
         console.log(error)
         localStorage.removeItem('token')

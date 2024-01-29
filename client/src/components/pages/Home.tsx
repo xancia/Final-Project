@@ -1,5 +1,7 @@
+
 import { NavBar } from "../NavBar"
 import Schedule from "../Schedule"
+
 
 
 const Home = () => {

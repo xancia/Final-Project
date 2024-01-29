@@ -24,6 +24,16 @@ export interface ExtendedAnimeData extends JakanData {
 
 export type userType = {
     username: string,
-    password: string,
-    email: string
+    password?: string,
+    email?: string
+    animeList?: animeListType[]
+}
+
+type animeListType = {
+    mal_id: number,
+        image: string,
+        title: string,
+        broadcastTime: string,
+        broadcastTimeZone: string,
+        score: string
 }
