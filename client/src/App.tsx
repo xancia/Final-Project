@@ -1,9 +1,33 @@
 
 import { Routes, Route } from "react-router-dom"
 import Home from "./components/pages/Home"
+import Register from "./components/pages/Register"
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [user, setUser] = useState({})
+  async function getUser(token: string) {
+    try {
+        const response = await axios.get('/api/users', {
+            headers: {
+                Authorization: token
+            }
+        })
 
+        setUser(response.data)
+    } catch (error) {
+        console.log(error)
+        localStorage.removeItem('token')
+    }
+}
+
+useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+        getUser(token)
+    } 
+}, [])
 
 
   return (
@@ -14,6 +38,7 @@ function App() {
         <Route path="/schedule" element={null} />
         <Route path="/login" element={null} />
         <Route path="/anime/:id" element={null} />
+        <Route path="/register" element={<Register setUser={setUser}/>} />
       </Routes>
     </>
   )

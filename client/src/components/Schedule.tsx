@@ -3,6 +3,7 @@ import { Jakan } from "jakan";
 import { useEffect, useState } from "react";
 import AnimeWeek from "./AnimeWeek";
 import { ExtendedAnimeData } from "@/vite-env";
+import axios from 'axios';
 
 const Schedule = () => {
   // Build a JakanMisc client
@@ -13,8 +14,20 @@ const Schedule = () => {
   const [wednesday, setWednesday] = useState<ExtendedAnimeData[] | null>(null);
   const [thursday, setThursday] = useState<ExtendedAnimeData[] | null>(null);
   const [friday, setFriday] = useState<ExtendedAnimeData[] | null>(null);
+  const [saturday, setSaturday] = useState<ExtendedAnimeData[] | null>(null);
+  const [sunday, setSunday] = useState<ExtendedAnimeData[] | null>(null);
   const delay = (ms: number | undefined) =>
     new Promise((res) => setTimeout(res, ms));
+
+    async function fetchCustomDay(day:string) {
+        try {
+          const response = await axios.get(`https://api.jikan.moe/v4/schedules/${day}`);
+          return response.data.data; 
+        } catch (error) {
+          console.error(`Error fetching schedule for ${day}:`, error);
+          return null;
+        }
+      }
 
   async function getSchedule() {
     const days = [
@@ -42,11 +55,20 @@ const Schedule = () => {
 
       await delay(1000);
     }
+
+    const saturdayData = await fetchCustomDay('saturday');
+    setSaturday(saturdayData); //
+
+    const sundayData = await fetchCustomDay('sunday');
+    setSunday(sundayData); // 
   }
   console.log(monday)
 
+ 
+
   useEffect(() => {
     getSchedule();
+
   }, []);
 
   return (
@@ -56,6 +78,8 @@ const Schedule = () => {
       {Array.isArray(wednesday) && <AnimeWeek day={wednesday} />}
       {Array.isArray(thursday) && <AnimeWeek day={thursday} />}
       {Array.isArray(friday) && <AnimeWeek day={friday} />}
+      {Array.isArray(saturday) && <AnimeWeek day={saturday} />}
+      {Array.isArray(sunday) && <AnimeWeek day={sunday} />}
     </div>
   );
 };
