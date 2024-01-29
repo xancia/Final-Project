@@ -34,7 +34,28 @@ async function create(req, res) {
     }
 }
 
+async function remove(req, res) {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.id, {
+        
+            $pull: {
+                animeList: {
+                    mal_id: req.body.mal_id
+                }
+            }
+        },
+        { new: true } 
+        
+        );
+
+        res.status(200).json(updatedUser)
+    } catch(err) {
+        console.log(err.message)
+    }
+}
+
 module.exports = {
     show,
-    create
+    create,
+    remove
 }
