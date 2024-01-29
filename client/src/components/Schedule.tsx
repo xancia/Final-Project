@@ -56,15 +56,16 @@ const Schedule = () => {
       await delay(1000);
     }
 
+    await delay(1500)
     const saturdayData = await fetchCustomDay('saturday');
-    setSaturday(saturdayData); //
+    setSaturday(saturdayData); 
 
+
+    await delay(1500)
     const sundayData = await fetchCustomDay('sunday');
-    setSunday(sundayData); // 
+    setSunday(sundayData); 
   }
-  console.log(monday)
 
- 
 
   useEffect(() => {
     getSchedule();

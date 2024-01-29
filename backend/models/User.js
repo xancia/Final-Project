@@ -18,7 +18,12 @@ const userSchema = new Schema({
     },
     animeList: [
         {
-            mal_id: {type : Number}
+            mal_id: {type : Number},
+            image: {type: String},
+            title: {type: String},
+            broadcastTime: {type: String},
+            broadcastTimeZone: {type: String},
+            score: {type: Number}
         }
     ]
 })
