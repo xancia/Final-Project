@@ -1,7 +1,7 @@
 import { ExtendedAnimeData } from "@/vite-env";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link } from "react-router-dom";
-
+import axios from 'axios';
 
 interface AnimeCardProps {
   anime: ExtendedAnimeData;
@@ -10,6 +10,33 @@ interface AnimeCardProps {
 const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
   const imageUrl = anime.images?.jpg.image_url;
 
+  async function handleClick() {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('No token found');
+
+      // Preparing the payload
+      const animeData = {
+        mal_id: anime.mal_id,
+        image: anime.images?.jpg.image_url,
+        title: anime.title,
+        broadcastTime: anime.broadcast?.time,
+        broadcastTimeZone: anime.broadcast?.timezone,
+        score: anime.score
+      };
+
+      // Sending a POST request to the server
+      const response = await axios.post('http://localhost:8080/api/users/anime', animeData, {
+        headers: {
+          Authorization: token
+        }
+      });
+
+      console.log('Anime added:', response.data);
+    } catch (error) {
+      console.error('Error adding anime:', error);
+    }
+  }
 
 
   return (
@@ -27,7 +54,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
           className="w-full h-full object-cover"
         />
 
-        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10">
+        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10" onClick={handleClick}>
           <Icon
             className="text-xl"
             icon="material-symbols:bookmark-outline-sharp"

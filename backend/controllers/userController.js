@@ -16,6 +16,24 @@ async function show(req, res) {
     }
 }
 
+async function create(req, res) {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.id, 
+            {
+                $push: { animeList: req.body }
+            },
+            { new: true } 
+        );
+        
+        res.status(200).json(updatedUser);
+    } catch(err) {
+        console.log(err.message);
+        res.status(500).json({ error: err.message });
+    }
+}
+
 module.exports = {
-    show
+    show,
+    create
 }
