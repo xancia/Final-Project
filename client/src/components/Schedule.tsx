@@ -53,15 +53,15 @@ const Schedule = () => {
         console.error("Error fetching schedule:", error);
       }
 
-      await delay(1000);
+      await delay(2000);
     }
 
-    await delay(1500)
+    await delay(2000)
     const saturdayData = await fetchCustomDay('saturday');
     setSaturday(saturdayData); 
 
 
-    await delay(1500)
+    await delay(2000)
     const sundayData = await fetchCustomDay('sunday');
     setSunday(sundayData); 
   }
