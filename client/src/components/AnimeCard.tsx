@@ -9,7 +9,6 @@ interface AnimeCardProps {
 const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
   const imageUrl = anime.images?.jpg.image_url;
 
-  console.log(anime);
   return (
     <div className="relative w-[175px] overflow-hidden rounded shadow-lg bg-white">
       {anime.broadcast && (
@@ -25,7 +24,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
           className="w-full h-full object-cover"
         />
 
-        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10">
+        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-9">
           <Icon
             className="text-xl"
             icon="material-symbols:bookmark-outline-sharp"
