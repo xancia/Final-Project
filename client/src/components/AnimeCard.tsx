@@ -60,7 +60,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
           data: animeData // Axios DELETE sends data in the 'data' field
         });
     
-        // Dispatch action to update Redux state
+        
         dispatch(removeSavedAnime(anime.mal_id));
     
         console.log('Anime removed:', anime.mal_id);
