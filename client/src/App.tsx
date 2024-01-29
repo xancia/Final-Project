@@ -10,7 +10,7 @@ function App() {
   const [user, setUser] = useState({})
   async function getUser(token: string) {
     try {
-        const response = await axios.get('/api/users', {
+        const response = await axios.get('http://localhost:8080/api/users', {
             headers: {
                 Authorization: token
             }
@@ -30,6 +30,7 @@ useEffect(() => {
     } 
 }, [])
 
+console.log(user)
 
   return (
     <>

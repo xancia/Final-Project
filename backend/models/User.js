@@ -15,7 +15,12 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true 
-    }
+    },
+    animeList: [
+        {
+            mal_id: {type : Number}
+        }
+    ]
 })
 
 const User = mongoose.model('User', userSchema)
