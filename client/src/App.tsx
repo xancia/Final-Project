@@ -9,6 +9,7 @@ import Login from "./components/pages/Login";
 import { userType } from "./vite-env";
 import { useDispatch } from "react-redux";
 import { setUserData } from "./components/utility/userDataSlice";
+import Library from "./components/pages/Library";
 
 const inititalUserState:userType = {
   username: '',
@@ -53,6 +54,7 @@ console.log(user)
         <Route path="/login" element={<Login setUser={setUser}/>} />
         <Route path="/anime/:id" element={null} />
         <Route path="/register" element={<Register setUser={setUser}/>} />
+        <Route path="/library" element={<Library />} />
       </Routes>
     </>
   )
