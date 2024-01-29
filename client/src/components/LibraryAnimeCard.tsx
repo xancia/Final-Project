@@ -40,9 +40,6 @@ const LibraryAnimeCard: React.FC<LibraryAnimeCardProps> = ({anime}) => {
   return (
     <div className="relative w-[175px] overflow-hidden rounded shadow-lg bg-white">
       
-        <div className="bg-gray-200 text-sm text-gray-700 px-2 py-1 text-center">
-          {anime.broadcastTime} ({anime.broadcastTimeZone})
-        </div>
     
 
       <div className="relative h-[250px]">

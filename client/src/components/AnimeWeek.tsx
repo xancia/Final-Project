@@ -10,7 +10,7 @@ const AnimeWeek: React.FC<AnimeCardProps> = ({day}) => {
   return (
     <div className="flex flex-col">
             <div className="py-10">
-                <p className="text-4xl">{day[0].broadcast?.day}</p>
+                <p className="text-4xl md:text-6xl font-bold underline">{day[0].broadcast?.day}</p>
             </div>
             <div className="flex flex-wrap gap-4 w-full">
             {Array.isArray(day) && day.map((anime:JakanData) => (
