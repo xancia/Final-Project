@@ -3,10 +3,12 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom"
 import { removeSavedAnime } from "./utility/userDataSlice";
+import { animeListType } from "@/vite-env";
 
-
-
-const LibraryAnimeCard = ({anime}) => {
+interface LibraryAnimeCardProps {
+    anime: animeListType;
+  }
+const LibraryAnimeCard: React.FC<LibraryAnimeCardProps> = ({anime}) => {
     const dispatch = useDispatch()
 
 

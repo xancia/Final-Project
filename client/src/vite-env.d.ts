@@ -29,7 +29,7 @@ export type userType = {
     animeList?: animeListType[]
 }
 
-type animeListType = {
+export type animeListType = {
     mal_id: number,
         image: string,
         title: string,
