@@ -21,3 +21,9 @@ export interface ExtendedAnimeData extends JakanData {
     title?: string,
     title_english?: string
 }
+
+export type userType = {
+    username: string,
+    password: string,
+    email: string
+}

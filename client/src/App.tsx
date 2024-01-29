@@ -4,6 +4,7 @@ import Home from "./components/pages/Home"
 import Register from "./components/pages/Register"
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Login from "./components/pages/Login";
 
 function App() {
   const [user, setUser] = useState({})
@@ -36,7 +37,7 @@ useEffect(() => {
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={null} />
         <Route path="/schedule" element={null} />
-        <Route path="/login" element={null} />
+        <Route path="/login" element={<Login setUser={setUser}/>} />
         <Route path="/anime/:id" element={null} />
         <Route path="/register" element={<Register setUser={setUser}/>} />
       </Routes>

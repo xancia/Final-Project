@@ -6,6 +6,7 @@ import { NavBar } from "../NavBar";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { userType } from "@/vite-env";
 
 let emptyForm = {
   username: "",
@@ -14,8 +15,12 @@ let emptyForm = {
 };
 
 
+interface RegisterProps {
+    setUser: React.Dispatch<React.SetStateAction<userType>>;
+}
 
-const Register = ({ setUser }) => {
+
+const Register: React.FC<RegisterProps> = ({ setUser }) => {
   const navigate = useNavigate();
 
   let [form, setForm] = useState(emptyForm);
@@ -47,7 +52,7 @@ const Register = ({ setUser }) => {
 
       setUser(userResponse.data);
 
-      navigate("/profile");
+      navigate("/");
     } catch (err) {
       console.log(err);
       alert(err);
@@ -55,58 +60,64 @@ const Register = ({ setUser }) => {
   };
   return (
     <div>
-      <NavBar />
-      <div className="w-screen h-screen flex justify-center items-center rounded-x1  border-opacity-10">
-        <form onSubmit={handleSubmit}>
-          <div className="w-96 p-6 shadow-2xl px-12">
-            <div className="w-full h-full flex justify-center items-center p-4">
-              <Icon
-                className="text-7xl"
-                icon="material-symbols:assignment-ind-sharp"
-              />
-            </div>
-            <label htmlFor="username">Username:</label>
-            <br />
-            <input
-              type="text"
-              id="username"
-              name="username"
-              onChange={handleChange}
-              value={form.username}
-              className="border-2 rounded-md w-full"
-            />
-            <br />
-            <br />
-            <label htmlFor="email">Email:</label>
-            <br />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              onChange={handleChange}
-              value={form.email}
-              className="border-2 rounded-md w-full"
-            />
-            <br />
-            <br />
-            <label htmlFor="password">Password:</label>
-            <br />
-            <input
-              type="password"
-              id="password"
-              name="password"
-              onChange={handleChange}
-              value={form.password}
-              className="border-2 rounded-md w-full"
-            />
-            <br />
-            <br />
-            <button className = ' w-40 border-2 rounded-md'>Submit</button>
-            <br /> <br />
-          </div>
-        </form>
+  <NavBar />
+  <div className="w-screen h-screen flex justify-center items-center">
+    <form onSubmit={handleSubmit} className="w-full max-w-md p-6 bg-white shadow-2xl rounded-lg">
+      <div className="flex justify-center items-center mb-6">
+        <Icon className="text-7xl text-black" icon="material-symbols:assignment-ind-sharp" />
       </div>
-    </div>
+
+      <div className="mb-4">
+        <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
+          Username:
+        </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          onChange={handleChange}
+          value={form.username}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+          Email:
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          onChange={handleChange}
+          value={form.email}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div className="mb-6">
+        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+          Password:
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          onChange={handleChange}
+          value={form.password}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div className="flex items-center justify-between">
+        <button className="bg-slate-800 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
   );
 };
 
