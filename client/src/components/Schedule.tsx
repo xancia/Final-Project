@@ -43,6 +43,7 @@ const Schedule = () => {
       await delay(1000);
     }
   }
+  console.log(monday)
 
   useEffect(() => {
     getSchedule();

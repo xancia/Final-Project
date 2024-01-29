@@ -2,12 +2,15 @@ import { ExtendedAnimeData } from "@/vite-env";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link } from "react-router-dom";
 
+
 interface AnimeCardProps {
   anime: ExtendedAnimeData;
 }
 
 const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
   const imageUrl = anime.images?.jpg.image_url;
+
+
 
   return (
     <div className="relative w-[175px] overflow-hidden rounded shadow-lg bg-white">
