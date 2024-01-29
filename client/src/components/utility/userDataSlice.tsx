@@ -16,10 +16,13 @@ const userDataSlice = createSlice({
       if (state && 'animeList' in state) {
         state.animeList.push(action.payload);
       }
-    }
+    },
+    removeSavedAnime: (state:any, action) => {
+      state.animeList = state.animeList.filter((anime: { mal_id: number; }) => anime.mal_id !== action.payload);
+    },
   },
 });
 
-export const { setUserData, addSavedAnime } = userDataSlice.actions;
+export const { setUserData, addSavedAnime, removeSavedAnime} = userDataSlice.actions;
 
 export default userDataSlice.reducer;
