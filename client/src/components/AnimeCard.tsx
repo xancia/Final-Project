@@ -27,7 +27,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
           className="w-full h-full object-cover"
         />
 
-        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-9">
+        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10">
           <Icon
             className="text-xl"
             icon="material-symbols:bookmark-outline-sharp"
