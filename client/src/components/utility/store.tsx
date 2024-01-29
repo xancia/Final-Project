@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import seasonDataReducer from "./seasonDataSlice"
+import animeReducer from "./animeDataSlice"
 
 export const store = configureStore({
   reducer: {
-    seasonData: seasonDataReducer,
+    animeData: animeReducer,
   },
 });
 
