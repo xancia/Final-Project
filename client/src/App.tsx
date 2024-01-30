@@ -9,6 +9,7 @@ import Login from "./components/pages/Login";
 import { useDispatch } from "react-redux";
 import { setUserData } from "./components/utility/userDataSlice";
 import Library from "./components/pages/Library";
+import AnimePage from "./components/pages/AnimePage";
 
 
 
@@ -45,7 +46,7 @@ useEffect(() => {
         <Route path="/browse" element={null} />
         <Route path="/schedule" element={null} />
         <Route path="/login" element={<Login />} />
-        <Route path="/anime/:id" element={null} />
+        <Route path="/anime/:id" element={<AnimePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/library" element={<Library />} />
       </Routes>
