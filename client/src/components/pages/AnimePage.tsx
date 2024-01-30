@@ -149,7 +149,7 @@ const AnimePage = () => {
                 </p>
               </div>
             </div>
-            <div className="flex flex-col m-4 p-2 w-full">
+            <div className="flex flex-col p-2 w-full">
               <div className="flex justify-between">
                 <div>
                   <p className="font-bold text-2xl">{anime.title}</p>
@@ -174,7 +174,7 @@ const AnimePage = () => {
                   )}
                 </div>
               </div>
-              <div className="flex flex-col bg-slate-900 rounded-md mt-10">
+              <div className="flex flex-col bg-slate-900 rounded-md mt-4">
                 <div className="flex flex-row justify-evenly p-4">
                   <div>
                     <div className="flex flex-col items-center">
@@ -204,8 +204,7 @@ const AnimePage = () => {
                 <div className="flex flex-col items-center">
                   <p className="text-2xl font-bold">Trailer</p>
                   <iframe
-                    width="560"
-                    height="315"
+                    className="w-full min-h-[325px] md:max-w-xl mx-auto aspect-ratio-16/9"
                     src={anime.trailer?.embed_url}
                     allow="encrypted-media"
                     allowFullScreen
