@@ -202,7 +202,7 @@ const AnimePage = () => {
                   </div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <p className="text-2xl font-bold">Trailer</p>
+                  <p className="text-2xl font-bold py-2">Trailer</p>
                   <iframe
                     className="w-full min-h-[325px] md:max-w-xl mx-auto aspect-ratio-16/9"
                     src={anime.trailer?.embed_url}
