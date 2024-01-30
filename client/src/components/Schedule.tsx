@@ -75,7 +75,7 @@ const Schedule = () => {
   }, []);
 
   return (
-    <div className="px-4">
+    <div className="px-8">
       {Array.isArray(monday) && <AnimeWeek day={monday} />}
       {Array.isArray(tuesday) && <AnimeWeek day={tuesday} />}
       {Array.isArray(wednesday) && <AnimeWeek day={wednesday} />}
