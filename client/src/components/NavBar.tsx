@@ -58,10 +58,12 @@ export const NavBar = () => {
       <div className="hidden md:flex md:items-center">
       {isLoggedIn ? (
           <>
-            <Link to='/library' className="mr-4">
-              <p>Library</p>
+            <Button className="mr-4" asChild>
+            <Link to='/library' >
+              <p className="">Library</p>
             </Link>
-            <Button className="" onClick={logout} asChild>
+            </Button>
+            <Button className="mr-4" onClick={logout} asChild>
               <Link to='/login'>Log out</Link>
             </Button>
             <ModeToggle />
