@@ -5,12 +5,19 @@ import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { RootState } from "./utility/store";
 import { userType } from "@/vite-env";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "./utility/userDataSlice";
 
 export const NavBar = () => {
   const [nav, setNav] = useState(false);
+  const dispatch = useDispatch();
   const userData = useSelector((state: RootState) => state.userData as userType | null)
   const isLoggedIn = userData && Object.keys(userData).length > 0;
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    dispatch(setUserData(null))
+  };
 
   const links = [
     {
@@ -54,6 +61,9 @@ export const NavBar = () => {
             <Link to='/library' className="mr-4">
               <p>Library</p>
             </Link>
+            <Button className="" onClick={logout} asChild>
+              <Link to='/login'>Log out</Link>
+            </Button>
             <ModeToggle />
           </>
         ) : (

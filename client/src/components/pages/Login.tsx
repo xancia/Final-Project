@@ -5,7 +5,8 @@ import { NavBar } from "../NavBar";
 import axios from 'axios'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { userType } from "@/vite-env";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../utility/userDataSlice";
 
 
 const emptyForm = { 
@@ -13,13 +14,10 @@ const emptyForm = {
     password: ''
 }
 
-interface RegisterProps {
-    setUser: React.Dispatch<React.SetStateAction<userType>>;
-}
 
-
-const Login: React.FC<RegisterProps> = ({setUser}) => {
+const Login = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const [form, setForm] = useState(emptyForm)
 
@@ -49,7 +47,7 @@ const Login: React.FC<RegisterProps> = ({setUser}) => {
                 }
             })
 
-            setUser(userResponse.data)
+            dispatch(setUserData(userResponse.data))
     
             navigate('/')
 

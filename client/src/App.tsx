@@ -4,22 +4,17 @@ import { Routes, Route } from "react-router-dom"
 import Home from "./components/pages/Home"
 import Register from "./components/pages/Register"
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Login from "./components/pages/Login";
-import { userType } from "./vite-env";
 import { useDispatch } from "react-redux";
 import { setUserData } from "./components/utility/userDataSlice";
 import Library from "./components/pages/Library";
 
-const inititalUserState:userType = {
-  username: '',
-  email: '',
-  animeList: []
-}
+
 
 function App() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState<userType>(inititalUserState)
+
   async function getUser(token: string) {
     try {
         const response = await axios.get('http://localhost:8080/api/users', {
@@ -28,7 +23,6 @@ function App() {
             }
         })
 
-        setUser(response.data)
         dispatch(setUserData(response.data))
     } catch (error) {
         console.log(error)
@@ -43,7 +37,6 @@ useEffect(() => {
     } 
 }, [])
 
-console.log(user)
 
   return (
     <>
@@ -51,9 +44,9 @@ console.log(user)
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={null} />
         <Route path="/schedule" element={null} />
-        <Route path="/login" element={<Login setUser={setUser}/>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/anime/:id" element={null} />
-        <Route path="/register" element={<Register setUser={setUser}/>} />
+        <Route path="/register" element={<Register />} />
         <Route path="/library" element={<Library />} />
       </Routes>
     </>
