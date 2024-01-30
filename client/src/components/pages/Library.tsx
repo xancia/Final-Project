@@ -11,7 +11,7 @@ const Library = () => {
     <div>
         <NavBar />
         <div className="pt-20 px-4">
-            <p className="py-10 text-4xl">My Saved Anime</p>
+            <p className="py-10 text-4xl capitalize">{userData?.username}'s Saved Anime</p>
             <div className="flex flex-wrap gap-4 w-full">
             {userData?.animeList?.map((anime) => (
                 <LibraryAnimeCard key={anime.mal_id} anime={anime}/>
