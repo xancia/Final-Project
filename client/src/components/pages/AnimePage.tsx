@@ -235,7 +235,7 @@ const AnimePage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col items-center">
+                {anime.trailer?.embed_url ?<div className="flex flex-col items-center">
                   <p className="text-2xl font-bold py-2">Trailer</p>
                   <iframe
                     className="w-full min-h-[325px] md:max-w-xl mx-auto aspect-ratio-16/9"
@@ -243,7 +243,11 @@ const AnimePage = () => {
                     allow="encrypted-media"
                     allowFullScreen
                   ></iframe>
-                </div>
+                </div> :
+                 <div className="flex justify-center items-center py-4">
+                    <p className="px-1">No trailer found</p> <Icon icon='noto-v1:disappointed-face'/>
+                    </div>
+                    }
                 <div className="p-4">
                   <p className="py-2 font-bold">Studio</p>
                   {anime.studios?.map((studio) => (
