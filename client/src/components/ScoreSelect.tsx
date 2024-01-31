@@ -19,8 +19,6 @@ import { useSelector } from "react-redux";
   const ScoreSelect: React.FC<ScoreSelectProps> = ({saveScore, anime}) => {
     const userData = useSelector((state: RootState) => state.userData as userType | null)
     const currentAnime = anime && userData?.animeList?.find((userAnime) => userAnime.mal_id === anime.mal_id);
-    console.log(anime)
-    console.log(currentAnime)
       const handleValueChange = (value: string) => {
           saveScore(Number(value)); 
         };
