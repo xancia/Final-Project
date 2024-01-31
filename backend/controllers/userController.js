@@ -54,6 +54,18 @@ async function remove(req, res) {
     }
 }
 
+async function update(req,res) {
+      try {
+        const user = await User.findById(req.id)
+        const anime = user.animeList.find(anime => anime.mal_id == req.body.mal_id)
+        anime.userScore = req.body.userScore
+        await user.save()
+        res.status(200).json(user);
+    } catch(err) {
+        console.log(err.message)
+    }
+}
+
 module.exports = {
     show,
     create,

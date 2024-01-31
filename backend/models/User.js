@@ -23,7 +23,8 @@ const userSchema = new Schema({
             title: {type: String},
             broadcastTime: {type: String},
             broadcastTimeZone: {type: String},
-            score: {type: Number}
+            score: {type: Number},
+            userScore: {type: Number}
         }
     ]
 })
