@@ -26,11 +26,6 @@ export const NavBar = () => {
       link: "home",
       href: "/",
     },
-    {
-      id: 2,
-      link: "Seasons",
-      href: "/",
-    },
   ];
 
   return (
