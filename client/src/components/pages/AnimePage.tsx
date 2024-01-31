@@ -10,7 +10,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { RootState } from "../utility/store";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { addSavedAnime, removeSavedAnime } from "../utility/userDataSlice";
+import { addSavedAnime, removeSavedAnime, setUserData } from "../utility/userDataSlice";
 import { Button } from "../ui/button";
 import ScoreSelect from "../ScoreSelect";
 
@@ -124,6 +124,8 @@ const AnimePage = () => {
         const response = await axios.put('http://localhost:8080/api/users/anime', scoreData, {
             headers: { Authorization: token }
         });
+
+        dispatch(setUserData(response.data))
 
         console.log('Score updated:', response.data);
     } catch (error) {
