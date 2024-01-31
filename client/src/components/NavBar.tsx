@@ -7,6 +7,7 @@ import { RootState } from "./utility/store";
 import { userType } from "@/vite-env";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "./utility/userDataSlice";
+import AnimeSearchSheet from "./AnimeSearchSheet";
 
 export const NavBar = () => {
   const [nav, setNav] = useState(false);
@@ -27,11 +28,6 @@ export const NavBar = () => {
     },
     {
       id: 2,
-      link: "Browse",
-      href: "/browse",
-    },
-    {
-      id: 3,
       link: "Seasons",
       href: "/season",
     },
@@ -53,6 +49,9 @@ export const NavBar = () => {
               <Link to={href}>{link}</Link>
             </li>
           ))}
+          <li className="px-4 cursor-pointer capitalize font-medium text-slate-900 dark:text-white hover:scale-105 duration-200">
+            <AnimeSearchSheet />
+          </li>
         </ul>
       </div>
       <div className="hidden md:flex md:items-center">

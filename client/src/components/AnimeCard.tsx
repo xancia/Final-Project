@@ -72,7 +72,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
 
   return (
     <div className="relative w-[175px] overflow-hidden rounded shadow-lg bg-white">
-      {anime.broadcast && (
+      {anime.broadcast?.time && (
         <div className="bg-gray-200 text-sm text-gray-700 px-2 py-1 text-center">
           {anime.broadcast.time} ({anime.broadcast.timezone})
         </div>
