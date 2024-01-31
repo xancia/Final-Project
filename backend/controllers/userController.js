@@ -69,5 +69,6 @@ async function update(req,res) {
 module.exports = {
     show,
     create,
-    remove
+    remove,
+    update
 }
