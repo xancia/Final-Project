@@ -156,7 +156,7 @@ const AnimePage = () => {
                 </div>
               </div>
               <div>
-              {anime && <ScoreSelect saveScore={saveScore} anime={anime} />}
+              {anime && userData && <ScoreSelect saveScore={saveScore} anime={anime} />}
               </div>
               <div className="flex flex-col py-4">
                 <p className="font-bold">Original Title</p>
