@@ -27,6 +27,8 @@ const AnimePage = () => {
     (item) => item.mal_id === anime?.mal_id
   );
   const dispatch = useDispatch();
+  const defaultEmbedUrl = ""; 
+    const modifiedEmbedUrl = (anime && anime.trailer?.embed_url?.replace('autoplay=1', 'autoplay=1&mute=1')) || defaultEmbedUrl;
 
   useEffect(() => {
     async function getAnime() {
@@ -242,7 +244,7 @@ const AnimePage = () => {
                   <p className="text-2xl font-bold py-2">Trailer</p>
                   <iframe
                     className="w-full min-h-[325px] md:max-w-xl mx-auto aspect-ratio-16/9"
-                    src={anime.trailer?.embed_url}
+                    src={modifiedEmbedUrl}
                     allow="encrypted-media"
                     allowFullScreen
                   ></iframe>
