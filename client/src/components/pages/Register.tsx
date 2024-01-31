@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../utility/userDataSlice";
+import { baseURL } from "@/App";
 
 let emptyForm = {
   username: "",
@@ -31,7 +32,7 @@ const Register = () => {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/auth/register", form);
+      const response = await axios.post(baseURL + "/auth/register", form);
       const token = response.data.token;
 
       console.log(token);
@@ -43,7 +44,7 @@ const Register = () => {
 
       localStorage.setItem("token", token);
 
-      const userResponse = await axios.get("http://localhost:8080/api/users", {
+      const userResponse = await axios.get(baseURL + "/api/users", {
         headers: {
           Authorization: token,
         },

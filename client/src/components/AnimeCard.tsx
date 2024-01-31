@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./utility/store";
 import { addSavedAnime, removeSavedAnime } from "./utility/userDataSlice";
+import { baseURL } from "@/App";
 
 interface AnimeCardProps {
   anime: ExtendedAnimeData;
@@ -32,7 +33,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
       };
 
       // Sending a POST request to the server
-      const response = await axios.post('http://localhost:8080/api/users/anime', animeData, {
+      const response = await axios.post(baseURL + '/api/users/anime', animeData, {
         headers: {
           Authorization: token
         }
@@ -53,7 +54,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
         const animeData = { mal_id: anime.mal_id };
     
         // Sending a DELETE request to the server
-        await axios.delete('http://localhost:8080/api/users/anime', {
+        await axios.delete(baseURL + '/api/users/anime', {
           headers: {
             Authorization: token
           },

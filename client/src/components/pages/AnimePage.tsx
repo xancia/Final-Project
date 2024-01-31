@@ -13,6 +13,7 @@ import axios from "axios";
 import { addSavedAnime, removeSavedAnime, setUserData } from "../utility/userDataSlice";
 import { Button } from "../ui/button";
 import ScoreSelect from "../ScoreSelect";
+import { baseURL } from "@/App";
 
 const AnimePage = () => {
   const { id } = useParams();
@@ -66,7 +67,7 @@ const AnimePage = () => {
 
       // Sending a POST request to the server
       const response = await axios.post(
-        "http://localhost:8080/api/users/anime",
+        baseURL + "/api/users/anime",
         animeData,
         {
           headers: {
@@ -90,7 +91,7 @@ const AnimePage = () => {
       const animeData = { mal_id: anime?.mal_id };
 
       // Sending a DELETE request to the server
-      await axios.delete("http://localhost:8080/api/users/anime", {
+      await axios.delete(baseURL + "/api/users/anime", {
         headers: {
           Authorization: token,
         },
@@ -123,7 +124,7 @@ const AnimePage = () => {
         };
 
         // Sending a PUT request to the server
-        const response = await axios.put('http://localhost:8080/api/users/anime', scoreData, {
+        const response = await axios.put(baseURL + '/api/users/anime', scoreData, {
             headers: { Authorization: token }
         });
 

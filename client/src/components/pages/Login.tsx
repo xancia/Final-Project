@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../utility/userDataSlice";
+import { baseURL } from "@/App";
 
 
 const emptyForm = { 
@@ -29,7 +30,7 @@ const Login = () => {
         e.preventDefault()
         try {
 
-            const response = await axios.post('http://localhost:8080/auth/login', form)
+            const response = await axios.post(baseURL + '/auth/login', form)
             const token = response.data.token
 
             console.log(token)
@@ -41,7 +42,7 @@ const Login = () => {
 
             localStorage.setItem("token", token)
 
-            const userResponse = await axios.get('http://localhost:8080/api/users', { 
+            const userResponse = await axios.get(baseURL + '/api/users', { 
                 headers: {
                     Authorization: token
                 }

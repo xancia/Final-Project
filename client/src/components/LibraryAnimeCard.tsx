@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeSavedAnime } from "./utility/userDataSlice";
 import { animeListType } from "@/vite-env";
+import { baseURL } from "@/App";
 
 interface LibraryAnimeCardProps {
   anime: animeListType;
@@ -20,7 +21,7 @@ const LibraryAnimeCard: React.FC<LibraryAnimeCardProps> = ({ anime }) => {
       const animeData = { mal_id: anime.mal_id };
 
       // Sending a DELETE request to the server
-      await axios.delete("http://localhost:8080/api/users/anime", {
+      await axios.delete(baseURL + "/api/users/anime", {
         headers: {
           Authorization: token,
         },

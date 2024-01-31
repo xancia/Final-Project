@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { Routes, Route } from "react-router-dom"
@@ -11,6 +12,7 @@ import { setUserData } from "./components/utility/userDataSlice";
 import Library from "./components/pages/Library";
 import AnimePage from "./components/pages/AnimePage";
 
+export const baseURL = import.meta.env.VITE_URL
 
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
 
   async function getUser(token: string) {
     try {
-        const response = await axios.get('http://localhost:8080/api/users', {
+        const response = await axios.get(baseURL + '/api/users', {
             headers: {
                 Authorization: token
             }
