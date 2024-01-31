@@ -45,7 +45,6 @@ useEffect(() => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/browse" element={null} />
         <Route path="/schedule" element={null} />
         <Route path="/login" element={<Login />} />
         <Route path="/anime/:id" element={<AnimePage />} />

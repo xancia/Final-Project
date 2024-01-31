@@ -29,7 +29,7 @@ export const NavBar = () => {
     {
       id: 2,
       link: "Seasons",
-      href: "/season",
+      href: "/",
     },
   ];
 
