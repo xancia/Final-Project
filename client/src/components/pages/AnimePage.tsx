@@ -27,14 +27,16 @@ const AnimePage = () => {
   );
   const dispatch = useDispatch();
 
-  async function getAnime() {
-    const animeData = await jakan.anime(animeID);
-    setAnime(animeData.data);
-  }
-
   useEffect(() => {
-    getAnime();
-  }, []);
+    async function getAnime() {
+      const animeData = await jakan.anime(animeID);
+      setAnime(animeData.data);
+    }
+
+    if (animeID) {
+      getAnime();
+    }
+  }, [animeID])
 
   function convertDateString(dateStr: any) {
     const date = new Date(dateStr);
