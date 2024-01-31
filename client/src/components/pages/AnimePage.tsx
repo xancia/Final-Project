@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addSavedAnime, removeSavedAnime } from "../utility/userDataSlice";
 import { Button } from "../ui/button";
+import ScoreSelect from "../ScoreSelect";
 
 const AnimePage = () => {
   const { id } = useParams();
@@ -102,6 +103,34 @@ const AnimePage = () => {
     }
   }
 
+  const saveScore = async (userScore: number) => {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No token found');
+
+        // Error Handling for checking Anime
+        if (!anime || anime.mal_id === undefined) {
+            console.error('Anime data is not available');
+            return;
+        }
+
+        // Preparing the payload
+        const scoreData = {
+            mal_id: anime.mal_id,
+            userScore: userScore
+        };
+
+        // Sending a PUT request to the server
+        const response = await axios.put('http://localhost:8080/api/users/anime', scoreData, {
+            headers: { Authorization: token }
+        });
+
+        console.log('Score updated:', response.data);
+    } catch (error) {
+        console.error('Error updating score:', error);
+    }
+};
+
   console.log(anime);
 
   return (
@@ -125,6 +154,9 @@ const AnimePage = () => {
                   </div>
                   <p className="pl-2">{anime.scored_by} ratings</p>
                 </div>
+              </div>
+              <div>
+                <ScoreSelect saveScore={saveScore}/>
               </div>
               <div className="flex flex-col py-4">
                 <p className="font-bold">Original Title</p>
