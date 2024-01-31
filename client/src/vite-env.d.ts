@@ -121,5 +121,6 @@ export type animeListType = {
         title: string,
         broadcastTime: string,
         broadcastTimeZone: string,
-        score: string
+        score: string,
+        userScore?: number
 }

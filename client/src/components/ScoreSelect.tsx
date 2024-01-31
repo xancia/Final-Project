@@ -7,12 +7,20 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select";
+import { ExtendedAnimeData, userType } from "@/vite-env";
+import { RootState } from "./utility/store";
+import { useSelector } from "react-redux";
   
   type ScoreSelectProps = {
       saveScore: (value: number) => void;
+      anime: ExtendedAnimeData;
     };
   
-  const ScoreSelect: React.FC<ScoreSelectProps> = ({saveScore}) => {
+  const ScoreSelect: React.FC<ScoreSelectProps> = ({saveScore, anime}) => {
+    const userData = useSelector((state: RootState) => state.userData as userType | null)
+    const currentAnime = anime && userData?.animeList?.find((userAnime) => userAnime.mal_id === anime.mal_id);
+    console.log(anime)
+    console.log(currentAnime)
       const handleValueChange = (value: string) => {
           saveScore(Number(value)); 
         };
@@ -21,7 +29,7 @@ import {
       <div className="py-4">
       <Select onValueChange={handleValueChange}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="My Rating" />
+          <SelectValue placeholder={currentAnime?.userScore !== undefined ? currentAnime?.userScore : "My Rating"} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
