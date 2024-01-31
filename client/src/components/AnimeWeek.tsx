@@ -7,16 +7,21 @@ interface AnimeCardProps {
   }
 
 const AnimeWeek: React.FC<AnimeCardProps> = ({day}) => {
+  const hasAnime = day && Array.isArray(day) && day.length > 0;
   return (
     <div className="flex flex-col">
-            <div className="py-10">
+            {hasAnime &&  
+            <>
+            <div className="pb-10 pt-4">
                 <p className="text-4xl md:text-6xl font-bold underline">{day[0].broadcast?.day}</p>
             </div>
             <div className="flex flex-wrap gap-4 w-full">
-            {Array.isArray(day) && day.map((anime:JakanData) => (
+            {day.map((anime:JakanData) => (
                 <AnimeCard key={anime.mal_id} anime={anime}/> 
             ))}
             </div>
+            </>
+            }
         </div>
   )
 }
