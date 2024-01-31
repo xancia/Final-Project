@@ -213,29 +213,29 @@ const AnimePage = () => {
                   )}
                 </div>
               </div>
-              <div className="flex flex-col bg-slate-900 rounded-md mt-4">
+              <div className="flex flex-col bg-gray-200 dark:bg-slate-900 rounded-md mt-4">
                 <div className="flex flex-row justify-evenly p-4">
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-slate-400">Format</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">Format</p>
                       <p className="font-bold">{anime.type}</p>
                     </div>
                   </div>
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-slate-400">Source</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">Source</p>
                       <p className="font-bold">{anime.source}</p>
                     </div>
                   </div>
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-slate-400">Episodes</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">Episodes</p>
                       <p className="font-bold">{anime.episodes}</p>
                     </div>
                   </div>
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-slate-400">Run time</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">Run time</p>
                       <p className="font-bold">{anime.duration}</p>
                     </div>
                   </div>
