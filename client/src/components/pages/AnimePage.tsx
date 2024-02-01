@@ -10,7 +10,11 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { RootState } from "../utility/store";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { addSavedAnime, removeSavedAnime, setUserData } from "../utility/userDataSlice";
+import {
+  addSavedAnime,
+  removeSavedAnime,
+  setUserData,
+} from "../utility/userDataSlice";
 import { Button } from "../ui/button";
 import ScoreSelect from "../ScoreSelect";
 import { baseURL } from "@/App";
@@ -27,8 +31,11 @@ const AnimePage = () => {
     (item) => item.mal_id === anime?.mal_id
   );
   const dispatch = useDispatch();
-  const defaultEmbedUrl = ""; 
-    const modifiedEmbedUrl = (anime && anime.trailer?.embed_url?.replace('autoplay=1', 'autoplay=1&mute=1')) || defaultEmbedUrl;
+  const defaultEmbedUrl = "";
+  const modifiedEmbedUrl =
+    (anime &&
+      anime.trailer?.embed_url?.replace("autoplay=1", "autoplay=1&mute=1")) ||
+    defaultEmbedUrl;
 
   useEffect(() => {
     async function getAnime() {
@@ -39,7 +46,7 @@ const AnimePage = () => {
     if (animeID) {
       getAnime();
     }
-  }, [animeID])
+  }, [animeID]);
 
   function convertDateString(dateStr: any) {
     const date = new Date(dateStr);
@@ -57,7 +64,6 @@ const AnimePage = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      // Preparing the payload
       const animeData = {
         mal_id: anime?.mal_id,
         image: anime?.images?.jpg.image_url,
@@ -67,7 +73,6 @@ const AnimePage = () => {
         score: anime?.score,
       };
 
-      // Sending a POST request to the server
       const response = await axios.post(
         baseURL + "/api/users/anime",
         animeData,
@@ -89,10 +94,8 @@ const AnimePage = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      // Preparing the payload
       const animeData = { mal_id: anime?.mal_id };
 
-      // Sending a DELETE request to the server
       await axios.delete(baseURL + "/api/users/anime", {
         headers: {
           Authorization: token,
@@ -110,33 +113,35 @@ const AnimePage = () => {
 
   const saveScore = async (userScore: number) => {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error('No token found');
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
 
-        // Error Handling for checking Anime
-        if (!anime || anime.mal_id === undefined) {
-            console.error('Anime data is not available');
-            return;
+      // Error Handling for checking Anime
+      if (!anime || anime.mal_id === undefined) {
+        console.error("Anime data is not available");
+        return;
+      }
+
+      const scoreData = {
+        mal_id: anime.mal_id,
+        userScore: userScore,
+      };
+
+      const response = await axios.put(
+        baseURL + "/api/users/anime",
+        scoreData,
+        {
+          headers: { Authorization: token },
         }
+      );
 
-        // Preparing the payload
-        const scoreData = {
-            mal_id: anime.mal_id,
-            userScore: userScore
-        };
+      dispatch(setUserData(response.data));
 
-        // Sending a PUT request to the server
-        const response = await axios.put(baseURL + '/api/users/anime', scoreData, {
-            headers: { Authorization: token }
-        });
-
-        dispatch(setUserData(response.data))
-
-        console.log('Score updated:', response.data);
+      console.log("Score updated:", response.data);
     } catch (error) {
-        console.error('Error updating score:', error);
+      console.error("Error updating score:", error);
     }
-};
+  };
 
   console.log(anime);
 
@@ -163,7 +168,9 @@ const AnimePage = () => {
                 </div>
               </div>
               <div>
-              {anime && userData && <ScoreSelect saveScore={saveScore} anime={anime} />}
+                {anime && userData && (
+                  <ScoreSelect saveScore={saveScore} anime={anime} />
+                )}
               </div>
               <div className="flex flex-col py-4">
                 <p className="font-bold">Original Title</p>
@@ -217,42 +224,53 @@ const AnimePage = () => {
                 <div className="flex flex-row justify-evenly p-4">
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-gray-600 dark:text-slate-400">Format</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">
+                        Format
+                      </p>
                       <p className="font-bold">{anime.type}</p>
                     </div>
                   </div>
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-gray-600 dark:text-slate-400">Source</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">
+                        Source
+                      </p>
                       <p className="font-bold">{anime.source}</p>
                     </div>
                   </div>
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-gray-600 dark:text-slate-400">Episodes</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">
+                        Episodes
+                      </p>
                       <p className="font-bold">{anime.episodes}</p>
                     </div>
                   </div>
                   <div>
                     <div className="flex flex-col items-center">
-                      <p className="text-sm text-gray-600 dark:text-slate-400">Run time</p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">
+                        Run time
+                      </p>
                       <p className="font-bold">{anime.duration}</p>
                     </div>
                   </div>
                 </div>
-                {anime.trailer?.embed_url ?<div className="flex flex-col items-center">
-                  <p className="text-2xl font-bold py-2">Trailer</p>
-                  <iframe
-                    className="w-full min-h-[325px] md:max-w-xl mx-auto aspect-ratio-16/9"
-                    src={modifiedEmbedUrl}
-                    allow="encrypted-media"
-                    allowFullScreen
-                  ></iframe>
-                </div> :
-                 <div className="flex justify-center items-center py-4">
-                    <p className="px-1">No trailer found</p> <Icon icon='noto-v1:disappointed-face'/>
-                    </div>
-                    }
+                {anime.trailer?.embed_url ? (
+                  <div className="flex flex-col items-center">
+                    <p className="text-2xl font-bold py-2">Trailer</p>
+                    <iframe
+                      className="w-full min-h-[325px] md:max-w-xl mx-auto aspect-ratio-16/9"
+                      src={modifiedEmbedUrl}
+                      allow="encrypted-media"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                ) : (
+                  <div className="flex justify-center items-center py-4">
+                    <p className="px-1">No trailer found</p>{" "}
+                    <Icon icon="noto-v1:disappointed-face" />
+                  </div>
+                )}
                 <div className="p-4">
                   <p className="py-2 font-bold">Studio</p>
                   {anime.studios?.map((studio) => (
@@ -270,7 +288,11 @@ const AnimePage = () => {
                 <div className="p-4">
                   <p className="py-2 font-bold">Tags</p>
                   {anime.genres?.map((genre) => (
-                    <Button key={genre.mal_id} className="rounded-lg mr-2" asChild>
+                    <Button
+                      key={genre.mal_id}
+                      className="rounded-lg mr-2"
+                      asChild
+                    >
                       <a
                         href={genre.url}
                         target="_blank"
