@@ -96,9 +96,26 @@ export const NavBar = () => {
               </Link>
             </li>
           ))}
-          <Button className="mt-4" asChild>
-            <a href="/login">Log In</a>
-          </Button>
+          
+          {isLoggedIn ? (
+          <>
+            <Button className="mb-4" asChild>
+            <Link to='/library' >
+              <p className="">Library</p>
+            </Link>
+            </Button>
+            <Button className="" onClick={logout} asChild>
+              <Link to='/login'>Log out</Link>
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button className="" asChild>
+              <Link to='/login'>Log in</Link>
+            </Button>
+          </>
+        )}
+        
         </ul>
       )}
     </div>
