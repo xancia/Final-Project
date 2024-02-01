@@ -16,7 +16,7 @@ const AnimeWeek: React.FC<AnimeCardProps> = ({day}) => {
     return dayString;
   };
 
-  const dayOfWeek = getDaySingularForm(day[0].broadcast?.day);
+  const dayOfWeek = hasAnime && getDaySingularForm(day[0].broadcast?.day);
 
   const getDayOfWeek = () => {
     const date = new Date();
