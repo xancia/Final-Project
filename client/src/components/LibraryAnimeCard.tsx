@@ -17,10 +17,8 @@ const LibraryAnimeCard: React.FC<LibraryAnimeCardProps> = ({ anime }) => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      // Preparing the payload
       const animeData = { mal_id: anime.mal_id };
 
-      // Sending a DELETE request to the server
       await axios.delete(baseURL + "/api/users/anime", {
         headers: {
           Authorization: token,
@@ -36,7 +34,7 @@ const LibraryAnimeCard: React.FC<LibraryAnimeCardProps> = ({ anime }) => {
     }
   }
 
-  const getBgColorClass = (score:number) => {
+  const getBgColorClass = (score: number) => {
     if (score >= 7) {
       return "bg-green-600 hover:bg-green-400";
     } else if (score >= 5) {
