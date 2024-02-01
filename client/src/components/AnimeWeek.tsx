@@ -32,10 +32,10 @@ const AnimeWeek: React.FC<AnimeCardProps> = ({day}) => {
     <div className="flex flex-col">
             {hasAnime &&  
             <>
-            <div className="pb-3 pt-4">
+            <div className="pb-3 pt-10">
                 <p className={`text-4xl md:text-6xl font-bold ${currentDay == dayOfWeek ? 'text-blue-500' : ''}`}>{dayOfWeek}</p>
             </div>
-            <span className={`h-1 w-full mb-10 ${currentDay == dayOfWeek ? 'bg-blue-500' : 'bg-black dark:bg-white'}`}></span>
+            <span className={`h-1 w-full mb-4 ${currentDay == dayOfWeek ? 'bg-blue-500' : 'bg-black dark:bg-white'}`}></span>
             <div className="flex flex-wrap gap-4 w-full">
             {day.map((anime:JakanData) => (
                 <AnimeCard key={anime.mal_id} anime={anime}/> 

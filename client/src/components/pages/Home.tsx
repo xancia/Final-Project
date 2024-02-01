@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
         <NavBar />
-        <div className="pt-20">
+        <div className="pt-16">
         <Schedule />
         </div>
     </div>

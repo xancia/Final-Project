@@ -97,7 +97,7 @@ const Schedule = () => {
   return (
     <div className="px-8">
       {userData && 
-      <div className="flex items-center space-x-2 pt-4">
+      <div className="absolute top-24 sm:top-28 right-10 flex items-center space-x-2 pt-4">
         <Switch onCheckedChange={handleChange}/>
         <Label className="text-xl">Filter</Label>
       </div>}
