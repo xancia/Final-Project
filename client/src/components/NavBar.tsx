@@ -129,9 +129,12 @@ export const NavBar = () => {
             </>
           ) : (
             <>
-              <Button className="" asChild>
+              <Button className="mb-4" asChild>
                 <Link to="/login">Log in</Link>
               </Button>
+              <Button className="" asChild>
+                  <Link to="/register">Register</Link>
+                </Button>
             </>
           )}
         </ul>
