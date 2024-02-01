@@ -1,7 +1,7 @@
 import { ExtendedAnimeData, userType } from "@/vite-env";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./utility/store";
 import { addSavedAnime, removeSavedAnime } from "./utility/userDataSlice";
@@ -12,64 +12,66 @@ interface AnimeCardProps {
 }
 
 const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const imageUrl = anime.images?.jpg.image_url;
-  const userData = useSelector((state: RootState) => state.userData as userType | null)
-  const isAnimeSaved = userData?.animeList?.some(item => item.mal_id === anime.mal_id);
+  const userData = useSelector(
+    (state: RootState) => state.userData as userType | null
+  );
+  const isAnimeSaved = userData?.animeList?.some(
+    (item) => item.mal_id === anime.mal_id
+  );
 
   async function handleClick() {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) throw new Error('No token found');
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
 
-      // Preparing the payload
       const animeData = {
         mal_id: anime.mal_id,
         image: anime.images?.jpg.image_url,
         title: anime.title,
         broadcastTime: anime.broadcast?.time,
         broadcastTimeZone: anime.broadcast?.timezone,
-        score: anime.score
+        score: anime.score,
       };
 
-      // Sending a POST request to the server
-      const response = await axios.post(baseURL + '/api/users/anime', animeData, {
-        headers: {
-          Authorization: token
+      const response = await axios.post(
+        baseURL + "/api/users/anime",
+        animeData,
+        {
+          headers: {
+            Authorization: token,
+          },
         }
-      });
-      dispatch(addSavedAnime(animeData))
-      console.log('Anime added:', response.data);
+      );
+      dispatch(addSavedAnime(animeData));
+      console.log("Anime added:", response.data);
     } catch (error) {
-      console.error('Error adding anime:', error);
+      console.error("Error adding anime:", error);
     }
   }
 
   async function handleRemove() {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error('No token found');
-    
-        // Preparing the payload
-        const animeData = { mal_id: anime.mal_id };
-    
-        // Sending a DELETE request to the server
-        await axios.delete(baseURL + '/api/users/anime', {
-          headers: {
-            Authorization: token
-          },
-          data: animeData // Axios DELETE sends data in the 'data' field
-        });
-    
-        
-        dispatch(removeSavedAnime(anime.mal_id));
-    
-        console.log('Anime removed:', anime.mal_id);
-      } catch (error) {
-        console.error('Error removing anime:', error);
-      }
-  }
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
 
+      const animeData = { mal_id: anime.mal_id };
+
+      await axios.delete(baseURL + "/api/users/anime", {
+        headers: {
+          Authorization: token,
+        },
+        data: animeData, // Axios DELETE sends data in the 'data' field
+      });
+
+      dispatch(removeSavedAnime(anime.mal_id));
+
+      console.log("Anime removed:", anime.mal_id);
+    } catch (error) {
+      console.error("Error removing anime:", error);
+    }
+  }
 
   return (
     <div className="relative w-[175px] overflow-hidden rounded shadow-lg bg-white">
@@ -86,26 +88,30 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
           className="w-full h-full object-cover"
         />
 
-        {isAnimeSaved ?
-        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10" onClick={handleRemove}>
-        <Icon
-          className="text-xl"
-          icon='material-symbols:bookmark-sharp'
-        />
-      </button>
-        
-        :
-        <button className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10" onClick={handleClick}>
-          <Icon
-            className="text-xl"
-            icon='material-symbols:bookmark-outline-sharp'
-          />
-        </button>}
-
+        {isAnimeSaved ? (
+          <button
+            className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10"
+            onClick={handleRemove}
+          >
+            <Icon className="text-xl" icon="material-symbols:bookmark-sharp" />
+          </button>
+        ) : (
+          <button
+            className="absolute top-0 right-0 bg-gray-600 hover:bg-gray-400 text-white font-bold py-1 px-1 rounded-sm z-10"
+            onClick={handleClick}
+          >
+            <Icon
+              className="text-xl"
+              icon="material-symbols:bookmark-outline-sharp"
+            />
+          </button>
+        )}
 
         <Link to={`/anime/${anime.mal_id}`}>
           <div className="absolute inset-0 bg-black bg-opacity-0 flex items-center justify-center opacity-0 hover:opacity-100 hover:bg-opacity-50 transition duration-300 ease-in-out">
-            <p className="text-white text-lg font-bold  text-center">{anime.title}</p>
+            <p className="text-white text-lg font-bold  text-center">
+              {anime.title}
+            </p>
           </div>
         </Link>
       </div>
