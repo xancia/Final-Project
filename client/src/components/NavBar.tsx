@@ -8,16 +8,23 @@ import { userType } from "@/vite-env";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "./utility/userDataSlice";
 import AnimeSearchSheet from "./AnimeSearchSheet";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export const NavBar = () => {
   const [nav, setNav] = useState(false);
   const dispatch = useDispatch();
-  const userData = useSelector((state: RootState) => state.userData as userType | null)
+  const userData = useSelector(
+    (state: RootState) => state.userData as userType | null
+  );
   const isLoggedIn = userData && Object.keys(userData).length > 0;
 
   const logout = () => {
-    localStorage.removeItem('token')
-    dispatch(setUserData(null))
+    localStorage.removeItem("token");
+    dispatch(setUserData(null));
   };
 
   const links = [
@@ -50,27 +57,39 @@ export const NavBar = () => {
         </ul>
       </div>
       <div className="hidden md:flex md:items-center">
-      {isLoggedIn ? (
-          <>
-            <Button className="mr-4" asChild>
-            <Link to='/library' >
-              <p className="">Library</p>
-            </Link>
-            </Button>
-            <Button className="mr-4" onClick={logout} asChild>
-              <Link to='/login'>Log out</Link>
-            </Button>
-            <ModeToggle />
-          </>
-        ) : (
-          <>
-            <Button className="mr-4" asChild>
-              <Link to='/login'>Log in</Link>
-            </Button>
-            <ModeToggle />
-          </>
-        )}
-
+        <Popover>
+          <PopoverTrigger>
+            <Icon
+              className="text-5xl mr-4"
+              icon="material-symbols:account-circle"
+            />
+          </PopoverTrigger>
+          <PopoverContent className="flex justify-evenly">
+            {isLoggedIn ? (
+              <>
+                <Button className="" asChild>
+                  <Link to="/library">
+                    <p className="">Library</p>
+                  </Link>
+                </Button>
+                <Button className="" onClick={logout} asChild>
+                  <Link to="/login">Log out</Link>
+                </Button>
+                <ModeToggle />
+              </>
+            ) : (
+              <>
+                <Button className="" asChild>
+                  <Link to="/login">Log in</Link>
+                </Button>
+                <Button className="" asChild>
+                  <Link to="/register">Register</Link>
+                </Button>
+                <ModeToggle />
+              </>
+            )}
+          </PopoverContent>
+        </Popover>
       </div>
       <div
         onClick={() => setNav(!nav)}
@@ -96,26 +115,25 @@ export const NavBar = () => {
               </Link>
             </li>
           ))}
-          
+
           {isLoggedIn ? (
-          <>
-            <Button className="mb-4" asChild>
-            <Link to='/library' >
-              <p className="">Library</p>
-            </Link>
-            </Button>
-            <Button className="" onClick={logout} asChild>
-              <Link to='/login'>Log out</Link>
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button className="" asChild>
-              <Link to='/login'>Log in</Link>
-            </Button>
-          </>
-        )}
-        
+            <>
+              <Button className="mb-4" asChild>
+                <Link to="/library">
+                  <p className="">Library</p>
+                </Link>
+              </Button>
+              <Button className="" onClick={logout} asChild>
+                <Link to="/login">Log out</Link>
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button className="" asChild>
+                <Link to="/login">Log in</Link>
+              </Button>
+            </>
+          )}
         </ul>
       )}
     </div>
