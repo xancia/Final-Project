@@ -9,6 +9,8 @@ import { Label } from "./ui/label";
 import { RootState } from "./utility/store";
 import { useSelector } from "react-redux";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -52,6 +54,7 @@ const Schedule2 = () => {
   const delay = (ms: number | undefined) =>
     new Promise((res) => setTimeout(res, ms));
     const [isFilterActive, setIsFilterActive] = useState(false)
+    const navigate = useNavigate()
 
     
 
@@ -118,7 +121,7 @@ const Schedule2 = () => {
       localStorage.removeItem(day);
     });
   
-    window.location.reload();
+    navigate(0)
   };
 
 
