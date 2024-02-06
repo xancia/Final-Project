@@ -8,6 +8,7 @@ import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { RootState } from "./utility/store";
 import { useSelector } from "react-redux";
+import { Button } from "./ui/button";
 
 
 
@@ -62,7 +63,7 @@ const Schedule2 = () => {
           }
       
           const response = await axios.get(`https://api.jikan.moe/v4/schedules/${day}`);
-          localStorage.setItem(day, JSON.stringify(response.data.data)); // Store on success
+          localStorage.setItem(day, JSON.stringify(response.data.data)); 
           return response.data.data;
         } catch (error) {
           console.error(`Error fetching schedule for ${day}:`, error);
@@ -92,7 +93,7 @@ const Schedule2 = () => {
     
       for (let i = 0; i < days.length; i++) {
         try {
-          const schedule = await fetchCustomDay(days[i]); // Use modified fetchCustomDay
+          const schedule = await fetchCustomDay(days[i]); 
           setters[i](schedule);
         } catch (error) {
           console.error("Error fetching schedule:", error);
@@ -101,6 +102,24 @@ const Schedule2 = () => {
         await delay(1000);
       }
   }
+
+  const handleClearCache = () => {
+    const days = [
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+      'sunday'
+    ];
+  
+    days.forEach(day => {
+      localStorage.removeItem(day);
+    });
+  
+    window.location.reload();
+  };
 
 
   useEffect(() => {
@@ -123,6 +142,9 @@ const Schedule2 = () => {
 
   return (
     <div className="px-8">
+        <div className="absolute top-[5.5rem] sm:top-[6.7rem] right-40 flex items-center space-x-2 pt-4">
+            <Button onClick={handleClearCache}>Refresh</Button>
+        </div>
       {userData && 
       <div className="absolute top-24 sm:top-28 right-10 flex items-center space-x-2 pt-4">
         <Switch onCheckedChange={handleChange}/>
