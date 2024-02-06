@@ -1,6 +1,6 @@
 
 import { NavBar } from "../NavBar"
-import Schedule from "../Schedule"
+import Schedule2 from "../Schedule2"
 
 
 
@@ -9,7 +9,7 @@ const Home = () => {
     <div>
         <NavBar />
         <div className="pt-16">
-        <Schedule />
+        <Schedule2 />
         </div>
     </div>
   )
